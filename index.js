@@ -1,26 +1,31 @@
-const token = 'AAGxCdKfp5TXrGLoykuhgvOpZPEI4aD-GzC6VSs';
-let TelegramBot = require('node-telegram-bot-api');
-let bot = new TelegramBot(token, { polling: true });
- 
+
+const TelegramBot = require('node-telegram-bot-api');
+
+// replace the value below with the Telegram token you receive from @BotFather
+const token = '6131597201:AAGxCdKfp5TXrGLoyvOpZPEI4aD-GzC6VSs';
+
+// Create a bot that uses 'polling' to fetch new updates
+const bot = new TelegramBot(token, {polling: true});
+
 // Matches "/echo [whatever]"
-bot.onText(/\/echo(.+)/, (msg, match) => {
- 
-    // The 'msg' is the received Message from Telegram
-    // and 'match' is the result of executing the regexp 
-    // above on the text content of the message
- 
-    let chatId = msg.chat.id;
- 
-    // The captured "whatever"
-    let resp = match[1];
- 
-    // send back the matched "whatever" to the chat
-    bot.sendMessage(chatId, resp);
-    bot.on('polling_error', (error) => {
-        var time = new Date();
-        console.log("TIME:", time);
-        console.log("CODE:", error.code);  // => 'EFATAL'
-        console.log("MSG:", error.message);
-        console.log("STACK:", error.stack);
-    });
+bot.onText(/\/echo (.+)/, (msg, match) => {
+    console.log("message recieved");
+  // 'msg' is the received Message from Telegram
+  // 'match' is the result of executing the regexp above on the text content
+  // of the message
+
+  const chatId = msg.chat.id;
+  const resp = match[1]; // the captured "whatever"
+
+  // send back the matched "whatever" to the chat
+  bot.sendMessage(chatId, resp);
+});
+
+// Listen for any kind of message. There are different kinds of
+// messages.
+bot.on('message', (msg) => {
+  const chatId = msg.chat.id;
+
+  // send a message to the chat acknowledging receipt of their message
+  bot.sendMessage(chatId, 'Received your message');
 });
