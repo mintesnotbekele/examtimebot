@@ -4,11 +4,24 @@
   "description": "examtime Q/A bot",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js --exec babel-node -e js",
+    "start": "npm run build && node index.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build   -s",
+    "build": "npm run clean && npm run build-babel",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "telegraf": "^4.12.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.1",
+    "@babel/core": "^7.21.1",
+    "@babel/node": "^7.21.1",
+    "@babel/plugin-transform-class-properties": "^7.21.1",
+    "@babel/preset-env": "^7.21.1",
+    "nodemon": "^2.0.22"
   }
 }

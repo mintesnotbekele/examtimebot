@@ -1,6 +1,6 @@
 const { Telegraf } = require('telegraf')
 
-const bot = new Telegraf('AAGxCdKfp5TXrGLoyvOpZPEI4aD-GzC6VSs');
+const bot = new Telegraf('6131597201:AAGxCdKfp5TXrGLoyvOpZPEI4aD-GzC6VSs');
 
 bot.command('start', ctx => {
     console.log(ctx.from)
