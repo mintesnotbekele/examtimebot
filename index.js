@@ -15,6 +15,11 @@ expressApp.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+bot.command('start', ctx => {
+  bot.telegram.sendMessage(ctx.chat.id, '/1 በቴሌ ብር ክፍያ ለመፈፀም ?\n /2 የቴሌ ብር መተግበርያ ከሌሎት አካውንት \n /3 ክፍያ ከፍለው ጥያቄዎችን እና ኖቶች ሎድ ለማድረግ \n /4 የ Exam Time ክፍያ ከፈፀሙ በኃላ የሚያገኙት አገልግሎቶች', {
+  })
+})
+
 
 bot.command('1', ctx => {
   bot.telegram.sendMessage(ctx.chat.id, '1. በቴሌ ብር ክፍያ ለመፈፀም ?\n\n - ውድ የ EXAM TIME ቤተሰቦች! \n\n *በቀላሉ ክፍያ ለመፈጸም \n\n*Sign up ሲያረጉ ስም እና ስልክ በትክክል ያስገባሉ ከዛም ክፍል  መርጠው ይገባሉ።\n*ከገቡ በኋላ "subscription" የሚለዉን ማስፈጠሪያ ይጫኑ።*ከዛም የቴል ብር የመክፈያ ገፅ ለይ የሚመጣውን "QR CODE" በቴል ብር scan በማድረግ ክፍያውን ይፈፅማሉ ።\n*ክፍያውን ከጨረሱ በኃላ የ refresh ምልክቷን በመጫን ሙሉ አገልግሎቱን ማግኘት ይችላሉ።\n*vpn ማጥፋት አይርሱ*\n\n ለበለጠ መረጃ ⬇️\nhttps://youtu.be/ALauh0GoqKI', {
