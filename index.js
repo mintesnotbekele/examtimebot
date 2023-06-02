@@ -28,7 +28,7 @@ bot.command('1', ctx => {
 
 bot.command('2', ctx => {
   
-  bot.telegram.sendMessage(ctx.chat.id, '2. የቴሌ ብር መተግበርያ ከሌሎት አካውንት \n\n ለማውጣት ወይም በሌላ ሰው የቴሌ ብር አካውንት ክፍያ ለመፈፀም ?\n\n ውድ የ EXAM TIME ቤተሰቦች! \n 1. በቀላሉ መተግበርያውን ከplay store በማውረድ መመዝገብ \n 2. ገንዘብ ወደ ቴሌ ብር በማስተላለፍ ክፍያውን መፈጸም ይችላሉ ። \n  ወይም \n 1. የቴሌ ብር መክፍያ ገፅ ለይ የሚመጣውን QR CODE screen shot ማድረግ\n  2. ለቴሌ ብር ወኪል ወይንም ቴሌ ብር ለሚጠቀም ሰው በመላክ ክፍያውን መፈፀም ይችላሉ ።\n  ለበለጠ መረጃ ⬇️\n  በ Exam Time ጥናታቹውን ቀለል ያድርጉ !!!  https://youtu.be/a5VzHJs9CCI', {
+  bot.telegram.sendMessage(ctx.chat.id, '2. የቴሌ ብር መተግበርያ ከሌሎት አካውንት ለማውጣት ወይም በሌላ ሰው የቴሌ ብር አካውንት ክፍያ ለመፈፀም ?\n\n ውድ የ EXAM TIME ቤተሰቦች! \n 1. በቀላሉ መተግበርያውን ከplay store በማውረድ መመዝገብ \n 2. ገንዘብ ወደ ቴሌ ብር በማስተላለፍ ክፍያውን መፈጸም ይችላሉ ። \n  ወይም \n 1. የቴሌ ብር መክፍያ ገፅ ለይ የሚመጣውን QR CODE screen shot ማድረግ\n  2. ለቴሌ ብር ወኪል ወይንም ቴሌ ብር ለሚጠቀም ሰው በመላክ ክፍያውን መፈፀም ይችላሉ ።\n  ለበለጠ መረጃ ⬇️\n  በ Exam Time ጥናታቹውን ቀለል ያድርጉ !!!  https://youtu.be/a5VzHJs9CCI', {
   })
 })
 
