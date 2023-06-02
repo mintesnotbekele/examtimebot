@@ -35,7 +35,7 @@ bot.command('start', ctx => {
   })
 })
 
-bot.command('ethereum', ctx => {
+bot.command('howtopay', ctx => {
   var rate;
   console.log(ctx.from)
   axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`)
