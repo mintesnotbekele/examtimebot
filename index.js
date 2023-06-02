@@ -53,6 +53,11 @@ bot.command('howtopay', ctx => {
   })
 })
 
+bot.command('how to pay', ctx => {
+  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
+  })
+})
+
 bot.command('How to Pay On Telebirr', ctx => {
   console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
