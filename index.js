@@ -1,31 +1,71 @@
+const express = require('express')
+const expressApp = express()
+const axios = require("axios");
+const path = require("path")
+const port = process.env.PORT || 3000;
+expressApp.use(express.static('static'))
+expressApp.use(express.json());
+require('dotenv').config();
 
-const TelegramBot = require('node-telegram-bot-api');
+const { Telegraf } = require('telegraf');
 
-// replace the value below with the Telegram token you receive from @BotFather
-const token = '6131597201:AAGxCdKfp5TXrGLoyvOpZPEI4aD-GzC6VSs';
+const bot = new Telegraf("6131597201:AAGxCdKfp5TXrGLoyvOpZPEI4aD-GzC6VSs");
 
-// Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, {polling: true});
-
-// Matches "/echo [whatever]"
-bot.onText(/\/echo (.+)/, (msg, match) => {
-    console.log("message recieved");
-  // 'msg' is the received Message from Telegram
-  // 'match' is the result of executing the regexp above on the text content
-  // of the message
-
-  const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
-
-  // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, resp);
+expressApp.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-// Listen for any kind of message. There are different kinds of
-// messages.
-bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
+bot.command('start', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to the Code Capsules telegram bot.\nI respond to /ethereum. Please try it', {
+  })
+})
 
-  // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, 'Received your message');
-});
+bot.command('ethereum', ctx => {
+  var rate;
+  console.log(ctx.from)
+  axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`)
+  .then(response => {
+    console.log(response.data)
+    rate = response.data.ethereum
+    const message = `Hello, today the ethereum price is ${rate.usd}USD`
+    bot.telegram.sendMessage(ctx.chat.id, message, {
+    })
+  })
+})
+
+bot.command('በቴሌ ብር ክፍያ ለመፈፀም ?', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
+  })
+})
+
+bot.command('የቴሌ ብር መተግበርያ ከሌሎት አካውንት  ለማውጣት ወይም በሌላ ሰው የቴሌ ብር አካውንት ክፍያ ለመፈፀም?', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
+  })
+})
+
+bot.command('ክፍያ ከፍለው ጥያቄዎችን እና ኖቶች ሎድ ለማድረግ', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
+  })
+})
+
+bot.command('የ Exam Time ክፍያ ከፈፀሙ በኃላ የሚያገኙት አገልግሎቶች', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
+  })
+})
+
+
+bot.command('በቴሌ ብር ክፍያ ለመፈፀም ?', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
+  })
+})
+
+// expressApp.use(bot.webhookCallback('/secret-path'))
+// bot.telegram.setWebhook('<YOUR_CAPSULE_URL>/secret-path')
+// expressApp.listen(port, () => console.log(`Listening on ${port}`));
+bot.launch()
