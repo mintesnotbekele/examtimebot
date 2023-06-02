@@ -48,7 +48,7 @@ bot.command('ethereum', ctx => {
   })
 })
 
-bot.command('How to Pay On Telebirr', ctx => {
+bot.command('HowtoPayOnTelebirr', ctx => {
   console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
   })
