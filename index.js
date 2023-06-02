@@ -15,60 +15,25 @@ expressApp.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-bot.command('echo', ctx => {
-	// Split the text message sent by the user
-	// const message = ctx.message.text.split(' ');
-  //   	// Remove the first element from array
-  //   	message.shift();
-    
-  //   	ctx.reply(message.join(' '));
-  console.log(ctx.message);
-})
-
-bot.catch((err, ctx) => {
-  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
-})
-
-bot.command('start', ctx => {
-  console.log(ctx.from)
-  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to the Code Capsules telegram bot.\nI respond to /ethereum. Please try it', {
-  })
-})
-
-bot.command('ethereum', ctx => {
-  var rate;
-  console.log(ctx.from)
-  axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`)
-  .then(response => {
-    console.log(response.data)
-    rate = response.data.ethereum
-    const message = `Hello, today the ethereum price is ${rate.usd}USD`
-    bot.telegram.sendMessage(ctx.chat.id, message, {
-    })
-  })
-})
-
 
 bot.command('how_to_pay_with_telebirr', ctx => {
-  console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, '1. በቴሌ ብር ክፍያ ለመፈፀም ?\n\n - ውድ የ EXAM TIME ቤተሰቦች! \n\n *በቀላሉ ክፍያ ለመፈጸም \n\n*Sign up ሲያረጉ ስም እና ስልክ በትክክል ያስገባሉ ከዛም ክፍል  መርጠው ይገባሉ።\n*ከገቡ በኋላ "subscription" የሚለዉን ማስፈጠሪያ ይጫኑ።*ከዛም የቴል ብር የመክፈያ ገፅ ለይ የሚመጣውን "QR CODE" በቴል ብር scan በማድረግ ክፍያውን ይፈፅማሉ ።\n*ክፍያውን ከጨረሱ በኃላ የ refresh ምልክቷን በመጫን ሙሉ አገልግሎቱን ማግኘት ይችላሉ።\n*vpn ማጥፋት አይርሱ*\n\n ለበለጠ መረጃ ⬇️\nhttps://youtu.be/ALauh0GoqKI', {
   })
 })
 
 bot.command('telebirr_account_creation', ctx => {
-  console.log(ctx.from)
+  
   bot.telegram.sendMessage(ctx.chat.id, '2. የቴሌ ብር መተግበርያ ከሌሎት አካውንት \n\n ለማውጣት ወይም በሌላ ሰው የቴሌ ብር አካውንት ክፍያ ለመፈፀም ?\n\n ውድ የ EXAM TIME ቤተሰቦች! \n 1. በቀላሉ መተግበርያውን ከplay store በማውረድ መመዝገብ \n 2. ገንዘብ ወደ ቴሌ ብር በማስተላለፍ ክፍያውን መፈጸም ይችላሉ ። \n  ወይም \n 1. የቴሌ ብር መክፍያ ገፅ ለይ የሚመጣውን QR CODE screen shot ማድረግ\n  2. ለቴሌ ብር ወኪል ወይንም ቴሌ ብር ለሚጠቀም ሰው በመላክ ክፍያውን መፈፀም ይችላሉ ።\n  ለበለጠ መረጃ ⬇️\n  በ Exam Time ጥናታቹውን ቀለል ያድርጉ !!!  https://youtu.be/a5VzHJs9CCI', {
   })
 })
 
 bot.command('loading_questions', ctx => {
-  console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, '3. ክፍያ ከፍለው ጥያቄዎችን እና ኖቶች ሎድ ለማድረግ\n\n  -ክፍያውን ከጨረሱ በኃላ የ refresh ምልክቷን በመጫን ሙሉ አገልግሎቱን ማግኘት ይችላሉ።\n  *ሎድ አድርጐ አስኪጨርሱ በትዕግሥት ይጠብቁ *\n *vpn ማጥፋት አይዘንጉ*\n ለበለጠ መረጃ ⬇️  https://youtu.be/7zIj1Vr8iO4', {
   })
 })
 
 bot.command('services', ctx => {
-  console.log(ctx.from)
+
   bot.telegram.sendMessage(ctx.chat.id, '4. የ Exam Time ክፍያ ከፈፀሙ በኃላ የሚያገኙት አገልግሎቶች\n\n  የ6 ዓመት የማትሪክ ጥያቄዎችን የ2014 ጨምሮ እንዲሁም ከ9-12ተኛ በአጫጭር ኖቶች ።\n  *አጠቃቀም*\n  በሁለት መንገድ ጥያቄዎችን መለማመድ ይችላሉ \n 1. የልምምድ አገልግሎቱን በማብራት ጥያቄዎችን ከነማብራራያቸው ማግኘት ይችላሉ።\n  2. የልምምድ አገልግሎቱን በማጥፋት ልክ ፈተና ወስጥ እንዳሉ እራሶትን መፈተን ይችላሉ።\n  የማስታወሻ ቦታ ውስጥ በመግባት ያገኙትን ውጤት መከታተል ይችላሉ ።\n  የ6ዓመት የማትሪክ ጥያቄዎችን ከበቂ ማብራሪያ ጋር የያዘ ።\n  ለሁሉም የትምህርት አይነቶች አጫጭር ማጥኛ ኖቶች የያዘ ።\n  ለበለጠ መረጃ ⬇️\n  https://youtu.be/kCpru6-F9dU', {
   })
 })
