@@ -15,6 +15,20 @@ expressApp.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+bot.command('echo', ctx => {
+	// Split the text message sent by the user
+	// const message = ctx.message.text.split(' ');
+  //   	// Remove the first element from array
+  //   	message.shift();
+    
+  //   	ctx.reply(message.join(' '));
+  console.log(ctx.message);
+})
+
+bot.catch((err, ctx) => {
+  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
+})
+
 bot.command('start', ctx => {
   console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to the Code Capsules telegram bot.\nI respond to /ethereum. Please try it', {
@@ -34,7 +48,7 @@ bot.command('ethereum', ctx => {
   })
 })
 
-bot.command('በቴሌ ብር ክፍያ ለመፈፀም ?', ctx => {
+bot.command('በቴሌብርክፍያለመፈፀም', ctx => {
   console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
   })
