@@ -48,45 +48,31 @@ bot.command('ethereum', ctx => {
   })
 })
 
-bot.command('howtopay', ctx => {
-  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
-  })
-})
 
-bot.command('how_to_pay', ctx => {
-  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
-  })
-})
-
-bot.command('የቴሌ', ctx => {
-  bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
-  })
-})
-
-bot.command('የቴሌ ብር መተግበርያ ከሌሎት አካውንት  ለማውጣት ወይም በሌላ ሰው የቴሌ ብር አካውንት ክፍያ ለመፈፀም?', ctx => {
+bot.command('how_to_pay_with_telebirr', ctx => {
   console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
   })
 })
 
-bot.command('ክፍያ ከፍለው ጥያቄዎችን እና ኖቶች ሎድ ለማድረግ', ctx => {
+bot.command('telebirr_account_creation', ctx => {
   console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
   })
 })
 
-bot.command('የ Exam Time ክፍያ ከፈፀሙ በኃላ የሚያገኙት አገልግሎቶች', ctx => {
+bot.command('loading_questions', ctx => {
   console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
   })
 })
 
-
-bot.command('በቴሌ ብር ክፍያ ለመፈፀም ?', ctx => {
+bot.command('services', ctx => {
   console.log(ctx.from)
   bot.telegram.sendMessage(ctx.chat.id, 'Hello there! Welcome to ExamTime.\nI here are the instructions for paying on EXAMTIME', {
   })
 })
+
 
 // expressApp.use(bot.webhookCallback('/secret-path'))
 // bot.telegram.setWebhook('<YOUR_CAPSULE_URL>/secret-path')
