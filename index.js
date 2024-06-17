@@ -1,50 +1,244 @@
-const express = require('express')
-const expressApp = express()
+const express = require("express");
+const expressApp = express();
 const axios = require("axios");
-const path = require("path")
+const path = require("path");
 const port = process.env.PORT || 3000;
-expressApp.use(express.static('static'))
+expressApp.use(express.static("static"));
 expressApp.use(express.json());
-require('dotenv').config();
+require("dotenv").config();
 
-const { Telegraf } = require('telegraf');
+const { Telegraf } = require("telegraf");
 
 const bot = new Telegraf("6131597201:AAGxCdKfp5TXrGLoyvOpZPEI4aD-GzC6VSs");
 
 expressApp.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-bot.command('start', ctx => {
-  bot.telegram.sendMessage(ctx.chat.id, '/1 በቴሌ ብር ክፍያ ለመፈፀም ?\n /2 የቴሌ ብር መተግበርያ ከሌሎት አካውንት \n /3 ክፍያ ከፍለው ጥያቄዎችን እና ኖቶች ሎድ ለማድረግ \n /4 የ Exam Time ክፍያ ከፈፀሙ በኃላ የሚያገኙት አገልግሎቶች', {
-  })
-})
+bot.command("start", (msg) => {
+  const chatId = msg.chat.id;
 
+  // Define the keyboard layout
+  const keyboard = {
+    reply_markup: {
+      inline_keyboard: [
+        [{ text: "How do I use the app?", callback_data: "button1" }],
+        [{ text: "How to pay using Chapa?", callback_data: "button2" }],
+        [{ text: "How to pay using CBE ?", callback_data: "button3" }],
+        [
+          {
+            text: "What should I do if the questions are not loading?",
+            callback_data: "button4",
+          },
+        ],
 
-bot.command('1', ctx => {
-  bot.telegram.sendMessage(ctx.chat.id, '1. በቴሌ ብር ክፍያ ለመፈፀም ?\n\n - ውድ የ EXAM TIME ቤተሰቦች! \n\n *በቀላሉ ክፍያ ለመፈጸም \n\n*Sign up ሲያረጉ ስም እና ስልክ በትክክል ያስገባሉ ከዛም ክፍል  መርጠው ይገባሉ።\n*ከገቡ በኋላ "subscription" የሚለዉን ማስፈጠሪያ ይጫኑ።*ከዛም የቴል ብር የመክፈያ ገፅ ለይ የሚመጣውን "QR CODE" በቴል ብር scan በማድረግ ክፍያውን ይፈፅማሉ ።\n*ክፍያውን ከጨረሱ በኃላ የ refresh ምልክቷን በመጫን ሙሉ አገልግሎቱን ማግኘት ይችላሉ።\n*vpn ማጥፋት አይርሱ*\n\n ለበለጠ መረጃ ⬇️\nhttps://youtu.be/ALauh0GoqKI', {
-  })
-})
+        [
+          {
+            text: "What should I do if the notes are not loading?",
+            callback_data: "button16",
+          },
+        ],
+        [
+          {
+            text: "How can I change my stream or grade level?",
+            callback_data: "button5",
+          },
+        ],
+        [
+          {
+            text: "How much does the app cost?",
+            callback_data: "button6",
+          },
+        ],
+        [
+          {
+            text: "Are the app contents suitable for remedial students?",
+            callback_data: "button7",
+          },
+        ],
+        [
+          {
+            text: "Is the app available for grade 8 students?",
+            callback_data: "button8",
+          },
+        ],
+        [
+          {
+            text: "Is the app available for university or college students?",
+            callback_data: "button9",
+          },
+        ],
+        [
+          {
+            text: "Where can I find previous matric questions in the app?",
+            callback_data: "button10",
+          },
+        ],
+        [
+          {
+            text: "Is the app available for grade 6 students?",
+            callback_data: "button11",
+          },
+        ],
+        [
+          {
+            text: "How do I use the app?",
+            callback_data: "button12",
+          },
+        ],
+        [
+          {
+            text: "Do I need to insert my email to use the app?",
+            callback_data: "button13",
+          },
+        ],
+        [
+          {
+            text: ' I received an error message saying "Unfortunately, Exam Time has stopped." What should I do?',
+            callback_data: "button14",
+          },
+        ],
+        [
+          {
+            text: " If I download the videos from Exam Time, can I use them offline after the initial download from YouTube?",
+            callback_data: "button15",
+          },
+        ],
+        [
+          {
+            text: " Is the app available for iPhone users?",
+            callback_data: "button17",
+          },
+        ],
+      ],
+    },
+  };
 
-bot.command('2', ctx => {
-  
-  bot.telegram.sendMessage(ctx.chat.id, '2. የቴሌ ብር መተግበርያ ከሌሎት አካውንት ለማውጣት ወይም በሌላ ሰው የቴሌ ብር አካውንት ክፍያ ለመፈፀም ?\n\n ውድ የ EXAM TIME ቤተሰቦች! \n 1. በቀላሉ መተግበርያውን ከplay store በማውረድ መመዝገብ \n 2. ገንዘብ ወደ ቴሌ ብር በማስተላለፍ ክፍያውን መፈጸም ይችላሉ ። \n  ወይም \n 1. የቴሌ ብር መክፍያ ገፅ ለይ የሚመጣውን QR CODE screen shot ማድረግ\n  2. ለቴሌ ብር ወኪል ወይንም ቴሌ ብር ለሚጠቀም ሰው በመላክ ክፍያውን መፈፀም ይችላሉ ።\n  ለበለጠ መረጃ ⬇️\n  በ Exam Time ጥናታቹውን ቀለል ያድርጉ !!!  https://youtu.be/a5VzHJs9CCI', {
-  })
-})
+  // Send the message with the keyboard
+  bot.telegram.sendMessage(chatId, "Choose an option:", keyboard);
+});
 
-bot.command('3', ctx => {
-  bot.telegram.sendMessage(ctx.chat.id, '3. ክፍያ ከፍለው ጥያቄዎችን እና ኖቶች ሎድ ለማድረግ\n\n  -ክፍያውን ከጨረሱ በኃላ የ refresh ምልክቷን በመጫን ሙሉ አገልግሎቱን ማግኘት ይችላሉ።\n  *ሎድ አድርጐ አስኪጨርሱ በትዕግሥት ይጠብቁ *\n *vpn ማጥፋት አይዘንጉ*\n ለበለጠ መረጃ ⬇️  https://youtu.be/7zIj1Vr8iO4', {
-  })
-})
+bot.on("callback_query", async (query) => {
+  const chatId = query.from.id;
+  const data = query.update.callback_query.data;
+  console.log(chatId);
+  console.log(query);
+  // Handle button clicks
+  switch (data) {
+    case "button1":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, to use the app, download and install it on your device. Create an account or sign in if you already have one. Explore the available features, such as study materials, practice questions, and educational resources. You can navigate through subjects, topics, and grade levels to find relevant content for your studies. Thank you for using Exam Time! Exam Time User Guide https://www.youtube.com/watch?v=bx8UYvtIIDo&t=2s"
+      );
+      break;
+    case "button2":
+      bot.telegram.sendMessage(
+        chatId,
+        "Check out this video for Chapa: https://www.youtube.com/watch?v=bIOmthZwZR8"
+      );
+      break;
+    case "button3":
+      bot.telegram.sendMessage(
+        chatId,
+        "Check out this video for CBE: https://www.youtube.com/watch?v=jiGMraBhUI8"
+      );
+      break;
+    case "button4":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, if the questions are not loading, please check your internet connection and try going to different sections of the app. This should help load the questions. Thank you for using Exam Time!"
+      );
+      break;
+    case "button5":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, to change your stream or grade level, contact our customer support at 0988321313. Thank you for using Exam Time!"
+      );
+      break;
+    case "button6":
+      bot.telegram.sendMessage(
+        chatId,
+        'Dear Exam Time user, to find the pricing details, please navigate to the settings page of the app and select the "Subscription Plan" option. There, you will be able to view the pricing information. Thank you for using Exam Time!'
+      );
+      break;
+    case "button7":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, the app's contents are specifically created to help remedial students. You'll discover various resources and materials that are designed to support your learning and help you improve. Thank you for using Exam Time!"
+      );
+      break;
+    case "button8":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, currently, Exam Time is not available for grade 8 students. We will add content for Grade 8 students soon. Thank you for using Exam Time!"
+      );
+      break;
+    case "button9":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, currently, Exam Time is not available for university and college students. We will add resources for university and college students soon. Thank you for using Exam Time!"
+      );
+      break;
+    case "button10":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, previous matric questions can be found within the practice section under national exams. Thank you for using Exam Time!"
+      );
+      break;
+    case "button11":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, currently, Exam Time is not available for grade 6 students. We will add content for Grade 6 students soon. Thank you for using Exam Time!"
+      );
+      break;
+    case "button12":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, to use the app, download and install it on your device. Create an account or sign in if you already have one. Explore the available features, such as study materials, practice questions, and educational resources. You can navigate through subjects, topics, and grade levels to find relevant content for your studies. Thank you for using Exam Time!"
+      );
+      break;
+    case "button13":
+      bot.telegram.sendMessage(
+        chatId,
+        " Dear Exam Time user, no, you do not need to provide your email address during the registration process to create an account and access the app's features. Thank you for using Exam Time!"
+      );
+      break;
+    case "button14":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, if you encounter the error message stating that the app has stopped, try uninstalling and reinstalling the app. If the problem persists, please contact our support team for further assistance. Thank you for using Exam Time!"
+      );
+      break;
+    case "button15":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, yes, once you have downloaded the videos from Exam Time, you can use them offline after the initial download. You can access the downloaded videos from your device's storage and play them without an internet connection. Thank you for using Exam Time!"
+      );
+    case "button16":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, if the notes are not loading, please ensure that you have a stable internet connection. And try to stay in the study section until it loads all. Thank you for using Exam Time!"
+      );
+      break;
+    case "button17":
+      bot.telegram.sendMessage(
+        chatId,
+        "Dear Exam Time user, currently, Exam Time is not available for iPhone users. It will be available soon. Thank you for using Exam Time!"
+      );
+      break;
 
-bot.command('4', ctx => {
-
-  bot.telegram.sendMessage(ctx.chat.id, '4. የ Exam Time ክፍያ ከፈፀሙ በኃላ የሚያገኙት አገልግሎቶች\n\n  የ6 ዓመት የማትሪክ ጥያቄዎችን የ2014 ጨምሮ እንዲሁም ከ9-12ተኛ በአጫጭር ኖቶች ።\n  *አጠቃቀም*\n  በሁለት መንገድ ጥያቄዎችን መለማመድ ይችላሉ \n 1. የልምምድ አገልግሎቱን በማብራት ጥያቄዎችን ከነማብራራያቸው ማግኘት ይችላሉ።\n  2. የልምምድ አገልግሎቱን በማጥፋት ልክ ፈተና ወስጥ እንዳሉ እራሶትን መፈተን ይችላሉ።\n  የማስታወሻ ቦታ ውስጥ በመግባት ያገኙትን ውጤት መከታተል ይችላሉ ።\n  የ6ዓመት የማትሪክ ጥያቄዎችን ከበቂ ማብራሪያ ጋር የያዘ ።\n  ለሁሉም የትምህርት አይነቶች አጫጭር ማጥኛ ኖቶች የያዘ ።\n  ለበለጠ መረጃ ⬇️\n  https://youtu.be/kCpru6-F9dU', {
-  })
-})
-
+    default:
+      console.log("default");
+      break;
+  }
+});
 
 // expressApp.use(bot.webhookCallback('/secret-path'))
 // bot.telegram.setWebhook('<YOUR_CAPSULE_URL>/secret-path')
 // expressApp.listen(port, () => console.log(`Listening on ${port}`));
-bot.launch()
+bot.launch({
+  webhook: {
+    domain: "https://admin.think-hubet.com",
+    port: port,
+  },
+});

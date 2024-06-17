@@ -4,7 +4,7 @@
   "description": "examtime Q/A bot",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js --exec babel-node -e js",
+    "dev": "nodemon index.js --exec babel-node -e js",
     "start": "npm run build && node index.js",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build   -s",
